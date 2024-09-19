@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demonstration of THIS, call(), and bind()</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .output {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        button {
+            padding: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Demonstrating "this", "call()" and "bind()"</h2>
+
+    <button id="button1">Use "this" in an Object Method</button>
+    <div class="output" id="output1"></div>
+
+    <button id="button2">Use "call()" Method</button>
+    <div class="output" id="output2"></div>
+
+    <button id="button3">Use "bind()" Method</button>
+    <div class="output" id="output3"></div>
+
+    <script>
+        // Object with a method to demonstrate 'this'
+        const person = {
+            name: 'John Doe',
+            sayHello: function() {
+                return 'Hello, my name is ' + this.name;
+            }
+        };
+
+        // A separate object
+        const anotherPerson = {
+            name: 'Jane Doe'
+        };
+
+        // Event listener for first button - demonstrating 'this'
+        document.getElementById('button1').addEventListener('click', function() {
+            document.getElementById('output1').textContent = person.sayHello();
+        });
+
+        // Event listener for second button - demonstrating 'call()'
+        document.getElementById('button2').addEventListener('click', function() {
+            document.getElementById('output2').textContent = person.sayHello.call(anotherPerson);
+        });
+
+        // Event listener for third button - demonstrating 'bind()'
+        document.getElementById('button3').addEventListener('click', function() {
+            const boundFunction = person.sayHello.bind(anotherPerson);
+            document.getElementById('output3').textContent = boundFunction();
+        });
+    </script>
+</body>
+</html>
